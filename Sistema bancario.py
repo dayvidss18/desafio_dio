@@ -3,7 +3,7 @@ print('''
     ========== BEM VINDO AO SISTEMA BANCARIO DIO ==========
     =======================================================''')
 max_saque = 0
-limite_saldo_saque = float(500)
+limite_saldo_saque = 500
 extrato = []
 
 saldo = 1000
@@ -21,28 +21,27 @@ Opções
 while True:
     opcao = int(input(menu))
     if opcao == 1:
-        if max_saque < 3 and limite_saldo_saque < 500:
-            print('''Ferramenta De Saque Dio''')
-            saque_usuario = int(input('Quanto deseja Sacar: '))
-            saldo = saldo - saque_usuario
-            print('''
-              ======================================================
-                     Você realizou o saque de {saque_usuario} reais
-              ======================================================
-              '''.format(saque_usuario = saque_usuario))
-            print('''
-              ======================================================
-                     Seu limite agora é de {saldo} reais
-              ======================================================
-              '''.format(saldo = saldo))
-            print('Você já realizou o maximo de saques hoje')
-            extrato.append('Você realizou o saque de {saque_usuario} reais'.format(saque_usuario = saque_usuario, saldo = saldo))
-            extrato.append('Saldo total: {saldo} Reais'.format(saldo = saldo))
-                    
-            max_saque+=1
-        else:
-            print('Você já realizou o maximo de saques por hoje!')
-      
+        while max_saque < 3 and opcao_sair == 'S':
+                print('''Ferramenta De Saque Dio''')
+                saque_usuario = int(input('Quanto deseja Sacar: '))
+                if saque_usuario < saldo:
+                    saldo = saldo - saque_usuario
+                    print('''
+                    ======================================================
+                            Você realizou o saque de {saque_usuario} reais
+                    ======================================================
+                    '''.format(saque_usuario = saque_usuario))
+                    print('''
+                    ======================================================
+                            Seu limite agora é de {saldo} reais
+                    ======================================================
+                    '''.format(saldo = saldo))
+                    extrato.append('Você realizou o saque de {saque_usuario} reais'.format(saque_usuario = saque_usuario, saldo = saldo))
+                    extrato.append('Saldo total: {saldo} Reais'.format(saldo = saldo))
+                else:
+                    print('Você não tem saldo suficiente!')
+                opcao_sair = input('Deseja Continuar no Saque S/N')
+                max_saque = max_saque + 1
 
         
     elif opcao == 2:
